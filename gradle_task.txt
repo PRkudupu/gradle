@@ -1,0 +1,28 @@
+CREATE A SIMPLE TASK IN 
+	This would be written in build.graddle as saved as hello
+	plugins {
+		id 'java'
+		id 'scala'
+	}
+
+	group 'org.example'
+	version '1.0-SNAPSHOT'
+
+	sourceCompatibility = 1.8
+
+	repositories {
+		mavenCentral()
+	}
+
+	dependencies {
+		testCompile group: 'junit', name: 'junit', version: '4.12'
+		implementation 'org.scala-lang:scala-library:2.11.12'
+		compile "org.apache.spark:spark-core_2.11:2.3.0"
+		testImplementation 'org.scalatest:scalatest_2.11:3.0.0'
+	}
+	task hello{
+		doLast{
+			println "hello gradle"
+		}
+	}
+

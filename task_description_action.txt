@@ -1,0 +1,6 @@
+task task1{
+    doLast{
+        println "hello gradle"
+    }
+}
+task1.description="Task description"

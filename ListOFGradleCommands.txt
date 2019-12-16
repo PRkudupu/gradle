@@ -1,0 +1,15 @@
+RUN A TASK
+	gradle <taskname> hello
+BUILD A PROJECT
+	Build a project
+GRADLE WRAPPER
+	Creates a shell script for the batch
+	Generates 2 files gradlew and GRADLEW.BAT
+	It would also create wrapper directory (WRAPPER)
+GRADLEW BUILD
+	Would download the version of the gradle what we specified
+	It would unzip the file and we would see lot of these in a movement and 
+	it would run gradle
+	
+
+

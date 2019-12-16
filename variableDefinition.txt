@@ -1,0 +1,13 @@
+def var="first variable definitation"
+task task1{
+    doLast{
+        println "hello gradle $var"
+    }
+}
+GLOBAL VARIABLES
+	ext.libraries ="lib"
+	task task1{
+    doLast{
+        println "hello gradle ${libraries}"
+    }
+}

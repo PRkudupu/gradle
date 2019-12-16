@@ -1,0 +1,261 @@
+GRADLE
+	Build by convention (It has buliding convention.Easily overwridable)
+	Written in JAVA but the build language is DSL (Built using Groovy)
+	GROOVY
+		This language makes it easy to configure build
+	Supports dependencies
+		Ivy and Maven
+	Supports multiple project builds
+	Allows to build non java projects
+	Easily customizable
+	Has a Declarative build language
+		Express Intent
+		Highly maintainable
+		We have to specify all the targets
+		Gets very large quickly
+		
+COMPETITORS
+	ANT
+		Hard to read 
+		Difficult to maintain
+	Maven
+		Advantages over ant
+		Has many conventions
+		We do not have to specify source and target
+		Supports dependency management
+		DEPENDENCIES
+			It would find the dependency and download for us
+			We dont have to worry about carrying the jar file with us
+			<Dependency></Dependency>
+			We dont have to worry about pairing the jar files with us
+		POM
+			Allows us to specify the dependencies and then resolve the 
+			dependencies when we need them
+		Highly extensible with plugins
+		
+		CONS
+			Written in XML and unmaintainable
+			
+GRADLE TEMPLATE
+	REPOSITORY
+		Specify which repository to use
+	PLUGIN
+		Specify which plugin to use
+	DEPENDENCIES
+		Specify which dependencies to use
+	TESTSETS
+	    Dependency test set
+	
+DOWNLOAD GRADLE
+	Go to gradle.org
+	
+		
+GROOVY ENVIRONMENT MANAGER
+	
+	
+GRADLE BUILDS
+	build.gradle
+		Gradle has build file
+	This contains tasks 
+		Plugins, dependency and mostly tasks
+TASKS
+
+    Has a life cycle
+	They are written as groovy code
+	
+	Has doLast and 
+	
+	plugins {
+    id 'java'
+    id 'scala'
+}
+
+PLUGIN
+	
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    implementation 'org.scala-lang:scala-library:2.11.12'
+    compile "org.apache.spark:spark-core_2.11:2.3.0"
+    testImplementation 'org.scalatest:scalatest_2.11:3.0.0'
+}
+task hello{
+doLast{
+    println "hello gradle"
+}
+}
+	
+//GO TO COMMAND PROMPT AND RUN GRABLE
+Type gradle hello
+BUILD
+	Once we generate a build, the files would be available at 
+	C:\Sephora\dp-ingestion\build\classes\scala\main
+
+STEPS WHICH IT GOES THROUGH BUULD PROCESS
+	complieJava
+	processResourcess
+	classes
+	jar
+	assemble
+	compileTestJava
+	ProcessTestResources
+	testClasses
+	test
+	check
+	build
+	
+.GRADLE 
+	Contains list of gradle uses
+	BUILD
+		CLASS
+			Classes built during the build process would be here
+			
+		LIBS
+			Would generate the jar file
+			
+		
+NOTE: gradle would only build the things that has changed
+GRADLE WRAPPER
+	Set of task 
+	It would create GRADLEW and gradlew.bat
+	GRADLEW
+		Creates a shell script that is used in linux
+		
+	It would have installed the wrapper for us in the user directory
+	Advantage of this is we carry the gradle
+DEFINING A TASK
+	PROJECT.TASK("TASK1")
+	TASK("TASK1")
+	TASK TASK
+TASK DESCRIPTION
+   
+	We can define a task using
+	TASK.DESCRIPTION ="Task 4"
+TASK ACTIONS
+	All methods have a method called DOLAST
+	task task1{
+    doLast{
+        println "hello gradle"
+    }
+}
+SHORT CUT FOR DOING LAST
+	task task1{
+    doLast{
+        println "hello gradle"
+    }
+}
+	
+BUILD PHASES
+	INITIALIZATION PHASE
+		Used to configure multi project builds
+	CONFIGURATION PHASE
+		Executes configuration phase executes any code
+	    ex 
+		Task myTask {
+		description "myTask configuration."
+		}
+	EXECUTION PHASE
+	    Executest the task
+		All actions are executed.
+		ex:
+		Task myTask {
+		doFirst
+		doLast
+		}
+DEPENDSON
+	*we can pass the dependson method for task dependencies
+	*These are built during the configuration phase
+	task task1{
+    doLast{
+        println "hello gradle"
+    }
+}
+task1.description="Task description"
+
+task task2{
+    task2.dependsOn task1
+    println " depends on task2 "
+}
+OTHER DEPENDENCIES
+	ShouldrunAfter
+	mustRunAfter
+PROPERTIES AND LOCAL VARIABLES
+	We can define the local variables using the def keyword
+	def var="first variable definitation"
+task task1{
+    doLast{
+        println "hello gradle $var"
+    }
+}
+GLOBAL VARIABLES
+	ext.libraries ="lib"
+	task task1{
+    doLast{
+        println "hello gradle ${libraries}"
+    }
+}
+   
+TYPED TASK
+	Reusing the existing code
+	Example is copying files . read/write
+	Comes with built in typed task
+TASK TYPES
+	These are reausable tasks which can be used from the market place
+	https://docs.gradle.org/current/dsl/org.gradle.api.tasks.scala.ScalaCompile.html
+	
+GRADLE DAEMON
+	Org.gradle.daemon =true
+	Gradle runs on the Java Virtual Machine (JVM) and uses several supporting libraries that require a non-trivial initialization time. 
+	As a result, it can sometimes seem a little slow to start. 
+	The solution to this problem is the Gradle Daemon: a long-lived background process that executes your builds much more quickly than would otherwise be the case. 
+	We accomplish this by avoiding the expensive bootstrapping process as well as leveraging caching, by keeping data about your project in memory. 
+	Running Gradle builds with the Daemon is no different than without. 
+	Simply configure whether you want to use it or not - everything else is handled transparently by Gradle.
+	
+SETTINGS.GRADLE
+	Used for multiple gradle projects
+	This would be executing before any build.gradle project
+	With this Settings object you can add subprojects to your build, modify the parameters from the command line (StartParameter), and access the Gradle object to register lifecycle handlers
+	
+GRADLE.PROPERTIES
+The gradle.properties file is a simple Java Properties file that only gains a special role by being automatically included into the scope of the Project object (as so-called 'project properties'). It's a simple key-value store that only allows string values (so you need to split lists or arrays by yourself). You can put gradle.properties files to these locations:			
+
+SOURCESETS
+	We can change the default source sets
+	default would be
+		JAVA
+			MAIN
+			TEST
+PROJECT DEPENDENCIES
+	external and internal dependencies
+	REPOSITORY
+		Dependencies can be satified from repository
+		File system
+		Maven
+		Ivy
+		mavencentral is the default repository
+note: We can have multiple repositories
+
+TRANSITIVE DEPENDENCIES
+	Some  libaries would depend on other libraries
+
+DEPENDENCY SPECIFICATION
+	dependecies can be specified using
+	group:<group> name:<name> version:<version>
+    we can skip the names
+
+DEPENDECY CACHE
+	Dependency are usually cached in our default user directory C:\Users\Prath\.gradle\caches
+	
+	
+	
+	
